@@ -2,9 +2,19 @@
   text-align: center;
 }
 
+h3 {
+    color: goldenrod;
+}
+
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 40vmin;
+}
+
+.App-logo-small {
+  animation: App-logo-spin-faster infinite 20s linear;
+  height: 6vmin;
+
 }
 
 .App-header {
@@ -16,7 +26,7 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-  background-image: url("images/gotgheader.jpg");
+  background-image: url("images/gotg-cockpit.jpg");
   background-size: 100%;
 
 }
@@ -32,4 +42,35 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+@keyframes App-logo-spin-faster {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(1720deg);
+  }
+}
+
+.App-table {
+  background-color: #282c34;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  opacity:0.9;
+}
+
+.App-table-row {
+  background-color: #282c34;
+  vertical-align:middle;
+  display: flex;
+  flex-direction: row;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  opacity:0.9;
 }
