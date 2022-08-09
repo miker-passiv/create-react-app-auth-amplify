@@ -1,3 +1,5 @@
+import Dygraph from 'dygraphs';
+import 'dygraphs/dist/dygraph.min.css'
 import ReactDOM from 'react-dom';
 import React, { Component } from 'react';
 import logo from './logo.svg';
@@ -5,8 +7,6 @@ import './App.css';
 import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react'
 import Amplify from 'aws-amplify';
 import aws_exports from './aws-exports';
-import Dygraph from 'dygraphs';
-import 'dygraphs/dist/dygraph.min.css'
 
 Amplify.configure(aws_exports);
 
@@ -38,7 +38,7 @@ function DevicesList(props) {
 
 function Spinner(props) {
     return (
-            <div>
+            <div className="border-fix">
             <img src={logo} className="App-logo-small" alt="logo" />
             <span> {props.text}</span>
             </div>
@@ -60,9 +60,9 @@ function DeviceData(props) {
     return (<div>
 	    <div>{"Detected Device:"+props.data.device_id.toString()}</div>
 	    <Spinner text={"Status: Operational ..."}/>
+
+	    <DyGraph url={props.data.device_events}/>
 	    <a className="App-link" href={props.data.device_events}>Data Stream Download!</a>
-	    <Graph/>
-	    <DyGraph/>
 	    </div>
 
 
@@ -81,9 +81,7 @@ function DeviceRows(props) {
     );
 }
 
-function Graph(props){
-    return (<div>---</div>)
-}
+
 
 
 
@@ -97,13 +95,17 @@ class DyGraph extends Component {
   }
 
   componentDidMount() {
-    const g = new Dygraph('graph',  `
+      const g = new Dygraph('graph', this.props.url
+/*
+   `
     '2016/01/01',10,20
     '2016/07/01',20,10
     '2016/12/31',40,30
     '2017/07/01',20,10
     '2017/12/31',40,30
-    `, {
+    `
+*/
+			    , {
         title: 'Environmental Trends',
         titleHeight: 32,
         ylabel: 'Absolute Valeus',
@@ -113,14 +115,18 @@ class DyGraph extends Component {
         height: 300,
         connectSeparatedPoints: true,
 	strokeWidth: 3,
-        highlightCircleSize: 10,
+        highlightCircleSize: 7,
         axes: { "x": { "axisLabelFontSize": 9 }, "y": { "axisLabelFontSize": 9 } },
-        labels: ['Date', 'Photonic Accumulation','Phononic Accumulation'],
+        labels: ['Date', 'Photon Accumulation','Average Kinetic Energy'],
 
           colors: ["rgb(51,204,204)",
                    "rgb(255,100,100)",
 		  ]     
     }        );
+
+      const interval = setInterval(() => {
+	  g.updateOptions( {'file': this.props.url} )
+      }, 1000);
   }
 }
 

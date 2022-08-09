@@ -18,7 +18,9 @@ a {
   height: 6vmin;
   margin-bottom:-22px;
 }
-
+.border-fix {
+    margin-bottom:22px;
+}
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -75,4 +77,15 @@ a {
   font-size: calc(10px + 2vmin);
   color: white;
   opacity:0.9;
+}
+
+.dygraph-legend {
+    text-align: left;
+    background-color:#ffffff00;
+    margin-top:-5px;
+    width:580px;
+}
+
+.dygraph-axis-label{
+    color:goldenrod;
 }
