@@ -23,7 +23,7 @@ class App extends Component {
     );
   }
   componentDidMount() {
-      let timer=setInterval(getData(),10000);
+      let timer=setTimeout(() => {getData()}, 4000);
   }
 }
 
